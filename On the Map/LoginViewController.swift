@@ -26,8 +26,6 @@ class LoginViewController: UIViewController {
         
         emailTextField.text = ""
         passwordTextField.text = ""
-        topLabel.backgroundColor = UIColor.clearColor()
-        topLabel.text = "Login to Udacity"
         hideActivity()
     }
     
@@ -116,11 +114,19 @@ class LoginViewController: UIViewController {
             
             if let errorString = errorString {
                 
-                self.topLabel.backgroundColor = UIColor.redColor()
-                self.topLabel.text = errorString
+                self.presentErrorAlertView(errorString)
                 self.hideActivity()
             }
         }
+    }
+    
+    // Present alert messages to the user
+    func presentErrorAlertView(error: String) {
+        
+        let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 }
